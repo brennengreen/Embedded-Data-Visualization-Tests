@@ -1,0 +1,32 @@
+{%  extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <style>
+
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <h1> {{ title }} </h1>
+    <p>{{ desc }}</p>
+
+    <div id="charts" style="width:50vh">
+        <canvas class="chart" id="chart1"></canvas><canvas class="chart" id="chart2"></canvas>
+
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+    <script type="text/javascript">
+        let data = JSON.parse("{{ chartOne }}".replace(/&quot;/g, '"'));
+        let chartOneCtx = document.getElementById('chart1').getContext('2d');
+        let chartOne = new Chart(chartOneCtx, data);
+
+        data = JSON.parse("{{ chartTwo }}".replace(/&quot;/g, '"'));
+        let chartTwoCtx = document.getElementById('chart2').getContext('2d');
+        let chartTwo = new Chart(chartTwoCtx, data);
+        //myChart.canvas.parentNode.style.height = "400px";
+        //myChart.canvas.parentNode.style.width = "400px";
+
+    </script>
+{% endblock %}
