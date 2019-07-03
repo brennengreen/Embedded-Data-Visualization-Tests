@@ -11,20 +11,36 @@
     <h1> {{ title }} </h1>
     <p>{{ desc }}</p>
 
-    <div id="charts" style="width:50vh">
-        <canvas class="chart" id="chart1"></canvas><canvas class="chart" id="chart2"></canvas>
 
-    </div>
+     <div id="viz-container" style="padding: 5vh;background: #d6d6d6; border-radius: 10px; opacity: 100%">
+        <div id="charts" style="position: relative;width:50%;margin:0 auto;">
+            <canvas class="chart" id="chart1" style="height: 55%;"></canvas>
+        </div>
+
+         <form name="render-config"style="width: 35%;margin: 0 auto">
+                    Graph Type: <select name="GraphType" form="render-config">
+                        <option value=""></option>
+                        <option value="bar">Bar</option>
+                        <option value="line">Line</option>
+                        <option value="radar">Radar</option>
+                        <option value="pie">Pie</option>
+                    </select>
+
+                    Labels: <input type="text" form="render-config">
+
+                    Data Points: <input type="text" form="render-config">
+
+                    <input type="submit" form="render-config">
+         </form>
+     </div>
+
+
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
     <script type="text/javascript">
         let data = JSON.parse("{{ chartOne }}".replace(/&quot;/g, '"'));
         let chartOneCtx = document.getElementById('chart1').getContext('2d');
         let chartOne = new Chart(chartOneCtx, data);
-
-        data = JSON.parse("{{ chartTwo }}".replace(/&quot;/g, '"'));
-        let chartTwoCtx = document.getElementById('chart2').getContext('2d');
-        let chartTwo = new Chart(chartTwoCtx, data);
         //myChart.canvas.parentNode.style.height = "400px";
         //myChart.canvas.parentNode.style.width = "400px";
 

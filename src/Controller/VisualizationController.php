@@ -3,7 +3,11 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+
 
 
 class JSChart
@@ -69,7 +73,13 @@ class JSChart
 
 class VisualizationController extends AbstractController
 {
-    public function homepage() {
+    public function homepage(Request $request) {
+
+
+
+
+
+
         $chart = new JSChart("bar");
         $chart->set_labels(array ('2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019'));
         $chart->set_datasets(
@@ -110,16 +120,14 @@ class VisualizationController extends AbstractController
         );
 
         $chartOneData = $chart->renderChart();
-        $chartTwoData = $chart2->renderChart();
-        $title = "Welcome to the Data Visualization Site";
-        $desc = "Quick and Useful Data Visualizations";
 
 
+        $title = "Chart Test";
+        $desc = "Quik Charts Mon";
         return $this->render('index.html.twig', [
            'title' => $title,
             'desc' => $desc,
             'chartOne' => json_encode($chartOneData),
-            'chartTwo' => json_encode($chartTwoData)
         ]);
     }
 
